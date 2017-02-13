@@ -11,8 +11,6 @@ $gb  = mysqli_fetch_array($re);
 
 if($_GET['s']!=1)
 {
-
-
   ##  inscription -----------------------------------
 
 $nom = $_POST['nom'] ;
