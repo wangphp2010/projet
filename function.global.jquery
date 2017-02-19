@@ -1,0 +1,65 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
+
+<script type="text/javascript">
+
+
+
+(function($){
+
+$.fn.extend({
+
+cc : function( ){
+	this.animate({width:600    },500);
+
+}
+
+});
+
+})(jQuery);
+
+
+//****************
+
+
+(function($){
+$.fn.extend({
+dialog : function(options){
+ 
+var setting = $.extend({}, {background:'green', width:300, height:200}, options); // 默认
+return this.css({'width':setting.width, 'height':setting.height, 'background':setting.background});
+}
+});
+})(jQuery);
+
+//********************
+
+$(function(){
+
+$('#j').click(function(){
+$('#w').dialog({
+background:'red',
+width:500,
+height:600
+});
+});
+ 
+ 
+ 
+ 
+	$('#j').click(function(){
+	
+	   $('#w').cc();
+	});
+ 
+
+
+});
+
+</script>
+
+<button id='j'>ok</button>
+<div id="w" style="border:1px solid #ccc; width:400px;height:200px;">
+okokok
+
+</div>
