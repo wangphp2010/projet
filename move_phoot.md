@@ -1,0 +1,142 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<style media="screen">
+
+
+ img{  width: 100%; height: 100%;
+           }
+
+#hs{ width: 50%; border: 2px solid #ccc ;  height: 680px;}
+#hs >  div{ float: left; margin: 20px 0 0 20px; width: 200px; height: 200px;}
+
+#hs > .hsc {    }
+
+
+
+
+
+
+
+</style>
+<script type="text/javascript">
+
+
+
+
+
+var lodiv =   {
+cl : 'div',
+ini : function() {
+  var arr = [];
+  var arrob = [];
+  var arrob_bak = [];
+
+  			$('#hs '+this.cl).each(function(index){
+    var pos = {};
+   				 pos.top  =	 $(this).position().top  ;
+  				 pos.left  =	 $(this).position().left   ;
+
+  				 arr[index] = pos ;
+   				  $(this).css({"top": pos.top , "left" : pos.left });
+                 arrob_bak.push(  $(this) );
+  				   if(   $(this).hasClass('d2')== false   )    arrob.push(  $(this) ) ;
+
+  			})
+},
+
+
+
+
+}
+	var arr = [];
+  var arrob = [];
+  var arrob_bak = [];
+   	$(function(){
+
+			$('#hs .hsc').each(function(index){
+  var pos = {};
+ 				 pos.top  =	 $(this).position().top  ;
+				 pos.left  =	 $(this).position().left   ;
+
+				 arr[index] = pos ;
+ 				  $(this).css({"top": pos.top , "left" : pos.left });
+               arrob_bak.push(  $(this) );
+				   if(   $(this).hasClass('d2')== false   )    arrob.push(  $(this) ) ;
+
+			});
+//***************************************************
+
+
+	$('#x').on('click', function(){
+
+              $.each(arrob_bak,function(index, el){
+                 el.stop().animate({  'top':arr[index].top ,'left':arr[index].left   },500);
+              });
+
+              $("#hs .d2").stop().animate({ 'opacity':1},500);
+
+    	});
+
+			$('#z').on('click', function(){
+         $("#hs .hsc").css({"position": "absolute"  });
+          $("#hs .d2").stop().animate({ 'opacity':0},500);
+
+          $.each(arrob,function(index, el){
+            el.stop().animate({  'top':arr[index].top ,'left':arr[index].left },500);
+          });
+	      });
+
+
+
+	});
+
+
+
+
+ </script>
+
+
+<button type="button" name="button" id="z">hide</button>
+<button type="button" name="button" id="x">show</button>
+
+<div  id="hs">
+
+      <div class="d2  hsc " id='d2' >
+          <img src="1.jpg" alt=""  class="img2">
+      </div>
+      <div class="d2 hsc" >
+          <img src="2.jpg" alt=""  class="img1">
+      </div>
+      <div class=" hsc " >
+          <img src="3.jpg" alt=""  class="img1">
+      </div>
+      <div class="d2 hsc " >
+          <img src="3.jpg" alt=""  class="img1">
+      </div>
+      <div class="d2 hsc " >
+          <img src="4.jpg" alt=""  class="img2">
+      </div>
+      <div class=" hsc " >
+          <img src="5.jpg" alt=""  class="img1">
+      </div>
+      <div class=" hsc d2  " >
+          <img src="5.jpg" alt=""  class="img1">
+      </div>
+      <div class=" hsc " >
+          <img src="5.jpg" alt=""  class="img1">
+      </div>
+      <div class=" hsc d2 " >
+          <img src="5.jpg" alt=""  class="img1">
+      </div>
+      <div class=" hsc " >
+          <img src="5.jpg" alt=""  class="img1">
+      </div>
+      <div class=" hsc " >
+          <img src="5.jpg" alt=""  class="img1">
+      </div>
+
+<span style="   "> <div style=" clear:both; position: relative;">
+fffsdfs
+</div>    </span>
+  </div>
+ 
