@@ -1,0 +1,274 @@
+
+	<label for="range" >A quelle rangee voulez vous aller ?</label>
+	<br>
+	<input id="range" type="number" value="1"  ><br><br>
+	
+	
+	<label for="number" >Combien de places voulez vous acheter ?</label>
+	<br>
+	<input id="number" type="number" value="2"  ><br><br>
+	
+
+
+	<input id="btn" type="button" value="ok" onClick='bb()' ><br><br>
+	<div id='table'></div> <div id='msg'   ></div>
+	
+	
+	
+	<style>
+		.mystyle{ border-color: red ; }
+			#customers {
+				
+		  font-family: Arial, Helvetica, sans-serif;
+		  border-collapse: collapse;
+		  width:50%;
+		}
+
+		#customers td, #customers th {
+		  border: 1px solid #ddd;
+		  padding: 8px;
+		}
+
+		#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+		#customers tr:hover {background-color: #ddd;}
+
+		#customers th {
+		  padding-top: 12px;
+		  padding-bottom: 12px;
+		  text-align: left;
+		  background-color: #4CAF50;
+		  color: white;
+		}
+		.bb{  color :  red !important ; }
+	</style>
+	
+ 	<script>
+ 		 
+		
+		
+ 		/*
+		for(var r = 0 ; r < 7 ; r++ )
+		{
+			
+			mp[r]= new Array();
+			for(var n = 0 ; n < 8 ; n++ )
+			{
+				mp[r][n] = 0 ;
+			}
+		}
+		*/
+		//localStorage.setItem("pls") = mp ;
+		
+		var pls = localStorage.getItem("pls") ;
+		
+		var msg = document.getElementById('msg'); 
+		var mp = new Array() ;
+		
+		for(var r = 0 ; r < 7 ; r++ )
+		{
+			mp[r] = new Array() ;  
+  			for(var n = 0 ; n < 8 ; n++ )
+			{
+				mp[r][n] = 0 ;
+ 				
+			}
+ 
+		}
+		
+		getpls()
+			
+		function bb()
+		{
+			
+
+			var places = JSON.parse(localStorage.getItem("pls"));
+			
+			
+			
+			
+			//document.getElementById('msg').innerHTML =  " ok <br>"; 
+			var msg = '' ; 
+			var n = document.getElementById('number').value       ; // 8 
+			var r = document.getElementById('range').value      ; // 7 
+			
+			 
+
+			if( n == ''  )
+			{
+				msg +=  " Numero vide "; 
+				document.getElementById('number').classList.add("mystyle");   
+				 
+			}
+			
+			if( r == '')
+			{
+				msg +=  " Range vide "; 
+				document.getElementById('range').classList.add("mystyle");
+
+			}
+			
+			if( n > 8 || r >7 )
+			{
+			
+				msg += " n <= 8 and  r <= 7  <br> " ; 
+				document.getElementById('number').classList.add("mystyle");
+				document.getElementById('range').classList.add("mystyle");   
+			}
+			
+			if( n != ''  && r != '' && n <= 8 && r <= 7    ) 
+			{
+ 				
+				if( places!= null &&  places.length > 0) 
+				{	
+					mp = places 
+					var ss = chkpls(r,n,mp ) ;
+					if( ss != -1 )
+					{
+ 						 takepls(r,n,mp,ss) ;
+					}
+					else
+					{
+						 
+						msg += " Votre place a ete chiois <br> " ;
+						
+					}
+				 
+				}
+				else
+				{
+ 
+					
+					 
+					 takepls(r,n,mp,0) ;
+					
+						
+				}
+				
+				document.getElementById('number').classList.remove( 'mystyle') 
+				document.getElementById('range').classList.remove( 'mystyle') 
+			}
+			
+			
+			msg += "Vous avez choisi Rang " + r + " , Numbre de places choisi : " + n ;
+						
+ 
+			document.getElementById('msg').innerHTML =  msg ; 
+			
+			getpls()
+			
+		}
+		
+		function getpls()
+		{
+			var table = '' ;
+			var places = JSON.parse(localStorage.getItem("pls"));
+		
+			
+			   
+				table += '<tr><td></td> <td>1</td> <td>2</td>    <td>3</td>  <td>4</td>  <td>5</td>  <td>6</td>  <td>7</td>  <td>8</td>  </tr> '
+				for(var r = 0 ; r < 7 ; r++ )
+				{
+					var t= r +1 ;
+					table += '<tr>' + '<td>' + 'Range : '+  t + '</td>'
+					for(var n = 0 ; n < 8 ; n++ )
+					{
+						if( places!= null &&  places.length > 0)
+						{
+							if(   places[r][n] == '1' )
+								table += '<td class="bb" >' + 'X'  + '</td>'
+							else
+								table += '<td    >' + '0'  + '</td>'
+						}
+						else
+							table += '<td   >' + '0'  + '</td>'
+
+						
+					}
+
+					table += '</tr>'
+					
+
+				}
+							table += '<tr><td></td> <td>1</td> <td>2</td>    <td>3</td>  <td>4</td>  <td>5</td>  <td>6</td>  <td>7</td>  <td>8</td>  </tr> '
+
+				table = '<table id="customers" > ' + table + '</table>'
+				
+				document.getElementById('table').innerHTML = table ; 
+			 
+			
+		//	console.log(places);
+
+		}
+		
+		function chkpls(r,n,a)
+		{
+			
+			var ar = new Array();   
+			
+			n = parseInt(n)    ;
+			r = parseInt(r) - 1  ;
+
+			var chek = -1 ;
+			ar = a[r] ;
+			
+			for( var i = 0 ; i <= ar.length - n ; i ++ )
+			{
+				 
+				
+				for(var t = i ; t < i + n   ; t ++ )
+				{
+					if( ar[t] == 1   )
+					{
+						break ; 
+					}
+					else
+					{
+						chek = i ;
+					}
+					
+					 
+				}
+				
+				 
+ 				if( -1 != chek  )
+				{ 
+ 					return i  ;
+				}
+				 
+				 
+			}
+			 
+ 			
+			if( -1 != chek  ) chek = i  ; 
+			return chek ;
+			
+		}
+		function takepls(r,n,a ,s )
+		{
+			var ar = new Array();
+			
+			n = parseInt(n)    ;
+			r = parseInt(r) - 1  ;
+			s = parseInt(s)    ;
+			  
+			ar = a[r] ;
+ 			
+			  for( var i = s ; i <  s + n ; i ++ )
+			  { 
+					
+					
+
+					 
+					 ar[i] =  1 ;
+ 			  }
+			  
+			 a[r] = ar  ;
+				 
+ 			  localStorage.setItem("pls" , JSON.stringify(a) )   ;
+			
+		}
+	
+
+
+	</script>
