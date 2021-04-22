@@ -3,13 +3,6 @@
 
 
 
-
-
-
-
-
-
-
 	<label for="range" >A quelle rangee voulez vous aller ?</label>
 	<br>
 	<input id="range" type="number" value="1"  ><br><br>
@@ -60,49 +53,37 @@
  	<script>
  		 
 		
+		 
 		
- 		/*
-		for(var r = 0 ; r < 7 ; r++ )
-		{
-			
-			mp[r]= new Array();
-			for(var n = 0 ; n < 8 ; n++ )
-			{
-				mp[r][n] = 0 ;
-			}
-		}
-		*/
-		//localStorage.setItem("pls") = mp ;
-		
-		var pls = localStorage.getItem("pls") ;
-		
-		var msg = document.getElementById('msg'); 
-		var mp = new Array() ;
-		
-		for(var r = 0 ; r < 7 ; r++ )
-		{
-			mp[r] = new Array() ;  
-  			for(var n = 0 ; n < 8 ; n++ )
-			{
-				mp[r][n] = 0 ;
- 				
-			}
- 
-		}
+		var msg 
+		msg = document.getElementById('msg');
 		
 		getpls()
 			
 		function bb()
 		{
 			
-
-			var places = JSON.parse(localStorage.getItem("pls"));
+			var pls   ,   mp ;
+ 			var places = JSON.parse(localStorage.getItem("pls"));
 			
 			
+			pls = localStorage.getItem("pls") ;
+		
+		 
+			mp = new Array() ;
 			
+			for(var r = 0 ; r < 7 ; r++ )
+			{
+				mp[r] = new Array() ;  
+				for(var n = 0 ; n < 8 ; n++ )
+				{
+					mp[r][n] = 0 ;
+					
+				}
+	 
+			}
 			
-			//document.getElementById('msg').innerHTML =  " ok <br>"; 
-			var msg = '' ; 
+ 			var msg = '' ; 
 			var n = document.getElementById('number').value       ; // 8 
 			var r = document.getElementById('range').value      ; // 7 
 			
@@ -211,8 +192,7 @@
 				document.getElementById('table').innerHTML = table ; 
 			 
 			
-		//	console.log(places);
-
+ 
 		}
 		
 		function chkpls(r,n,a)
@@ -284,6 +264,10 @@
 		}
 		function cl()
 		{
+			pls = null;
+			mp=null;
+			msg =  "OK<br>"
+			 
  			localStorage.clear();
 			getpls();
 		}
